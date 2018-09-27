@@ -1,0 +1,57 @@
+target/
+
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+.idea
+*.iws
+*.iml
+*.ipr
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# gradle
+.gradle
+
+# log
+logs/**
+
+.mvn
+
+/.project
+/.settings/
+
+/.vscode/
+/deploy
+/target
+**/build/
+
+**/.grunt
+
+
+**/node_modules
+
+# Book build output
+**/_book
+
+# eBook build output
+**/*.epub
+**/*.mobi
+**/*.pdf
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
