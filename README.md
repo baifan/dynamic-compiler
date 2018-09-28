@@ -1,5 +1,10 @@
 # Dynamic Compile Java && Check byte code
 
+[![Build Status](https://travis-ci.org/baifan/dynamic-compiler.svg?branch=master)](https://travis-ci.org/baifan/dynamic-compiler)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+
+
 1. Dynamic compile java source file to byte codes.
 2. Check which classes and methods are called in the byte codes. 
 
