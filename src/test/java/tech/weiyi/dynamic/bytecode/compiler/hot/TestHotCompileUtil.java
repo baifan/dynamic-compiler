@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class TestHotCompileUtil {
 
-    private static final String className = "Hello";
+    private static final String clazzName = "Hello";
 
     private Map<String, MemoryClazzFile> getMemoryClassMap() throws Exception {
         InputStream is = TestHotCompileUtil.class.getResourceAsStream("/test/Hello.java");
@@ -29,12 +29,8 @@ public class TestHotCompileUtil {
         }
 
         String source = new String(bytes);
-
-        String className = "Hello";
-
-        return DynamicCompiler.compile(className, source);
-
-
+        String clazzName = "Hello";
+        return DynamicCompiler.compile(clazzName, source);
     }
 
     private byte[] getClassByte() throws Exception {
@@ -49,20 +45,18 @@ public class TestHotCompileUtil {
     }
 
     @Test
-    public void analysisClassDefine() throws Exception {
-        Map<String, MemoryClazzFile> memClsMap = getMemoryClassMap();
+    public void analysisClazzDefine() throws Exception {
+        Map<String, MemoryClazzFile> memoryClazzFileMap = getMemoryClassMap();
         System.out.println("==================================================");
-        System.out.println("Class Size:" + memClsMap.size());
-        for (Map.Entry<String, MemoryClazzFile> entry : memClsMap.entrySet()) {
+        System.out.println("Class Size:" + memoryClazzFileMap.size());
+        for (Map.Entry<String, MemoryClazzFile> entry : memoryClazzFileMap.entrySet()) {
             System.out.println(entry.getKey());
         }
         System.out.println("==================================================");
 
-        MemoryClazzFile memoryClassFile = memClsMap.get(className);
-
-        MethodCallAnalyzer.getUsedClassSet(memoryClassFile.getBytes());
-
-        Class clazz = DynamicCompiler.loadClass(className, memClsMap);
+        MemoryClazzFile memoryClazzFile = memoryClazzFileMap.get(clazzName);
+        MethodCallAnalyzer.getUsedClassSet(memoryClazzFile.getBytes());
+        Class clazz = DynamicCompiler.loadClass(clazzName, memoryClazzFileMap);
         System.out.println(clazz.getTypeName());
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
@@ -73,9 +67,9 @@ public class TestHotCompileUtil {
 
     @Test
     public void analysisMethodCall() throws Exception {
-        Map<String, MemoryClazzFile> memClsMap = getMemoryClassMap();
-        MemoryClazzFile memoryClassFile = memClsMap.get(className);
-        Set<MethodCallElement> classSet = MethodCallAnalyzer.getUsedClassSet(memoryClassFile.getBytes());
+        Map<String, MemoryClazzFile> memoryClazzFileMap = getMemoryClassMap();
+        MemoryClazzFile memoryClazzFile = memoryClazzFileMap.get(clazzName);
+        Set<MethodCallElement> classSet = MethodCallAnalyzer.getUsedClassSet(memoryClazzFile.getBytes());
         System.out.println("==================================================");
         System.out.println(JSONObject.toJSONString(classSet, true));
         System.out.println("==================================================");
@@ -83,17 +77,17 @@ public class TestHotCompileUtil {
     }
 
     @Test
-    public void analysisClassElement() throws Exception {
-        Map<String, MemoryClazzFile> memClsMap = getMemoryClassMap();
-        MemoryClazzFile memoryClassFile = memClsMap.get(className);
-        Set<ClazzElement> clazzElements = ClazzCallAnalyzer.getUsedClassSet(memoryClassFile.getBytes());
+    public void analysisClazzElement() throws Exception {
+        Map<String, MemoryClazzFile> memoryClazzFileMap = getMemoryClassMap();
+        MemoryClazzFile memoryClazzFile = memoryClazzFileMap.get(clazzName);
+        Set<ClazzElement> clazzElements = ClazzCallAnalyzer.getUsedClassSet(memoryClazzFile.getBytes());
         System.out.println("==================================================");
         System.out.println(JSONObject.toJSONString(clazzElements, true));
         System.out.println("==================================================");
     }
 
     @Test
-    public void analysisClassElementBytes() throws Exception {
+    public void analysisClazzElementBytes() throws Exception {
         Set<ClazzElement> clazzElements = ClazzCallAnalyzer.getUsedClassSet(getClassByte());
         System.out.println("==================================================");
         System.out.println(JSONObject.toJSONString(clazzElements, true));
