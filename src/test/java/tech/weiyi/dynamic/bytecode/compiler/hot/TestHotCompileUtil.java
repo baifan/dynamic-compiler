@@ -34,7 +34,7 @@ public class TestHotCompileUtil {
     }
 
     private byte[] getClassByte() throws Exception {
-        InputStream is = TestHotCompileUtil.class.getResourceAsStream("/test/TestByteCode.class");
+        InputStream is = TestHotCompileUtil.class.getResourceAsStream("/tech/weiyi/dynamic/bytecode/analysis/ClazzCallAnalyzer.class");
         int fileSize = is.available();
         byte[] bytes = new byte[fileSize];
         if (is.read(bytes) != fileSize) {
